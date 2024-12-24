@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use App\Entity\Produit;
+use App\Entity\ContenuPanier;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\ProduitAddType;
@@ -36,7 +37,6 @@ class ProduitController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            print('form submitted');
             $imageFile = $form->get('photo')->getData();
  
             if ($imageFile) {
@@ -59,7 +59,6 @@ class ProduitController extends AbstractController
             $this->addFlash('success','Produit Ajouté');
             return $this->redirectToRoute('app_produit');
         }
-        print('k,o,o');
         return $this->render('produit/add.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -89,6 +88,42 @@ class ProduitController extends AbstractController
         return $this->render('produit/edit.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/produit/{id}/delete', name: 'app_produit_delete')] 
+    public function delete(Request $request, EntityManagerInterface $em, Produit $produit = null)
+    {
+        if ($produit === null) {
+            $this->addFlash('error', 'Product not found.');
+            return $this->redirectToRoute('app_produit');
+        }
+        
+        // Vérification du token CSRF
+        if ($this->isCsrfTokenValid('delete' . $produit->getId(), $request->request->get('csrf_token'))) {
+            
+            // Vérifier s'il y a des liens avec des paniers dans ContenuPanier
+            $contenuPaniers = $em->getRepository(ContenuPanier::class)->findBy(['produit' => $produit]);
+
+            if (count($contenuPaniers) > 0) {
+                // Si des liens existent, on peut les supprimer ou les dissocier
+                foreach ($contenuPaniers as $contenuPanier) {
+                    $em->remove($contenuPanier);
+                }
+                $em->flush();
+                $this->addFlash('warning', 'Le produit était dans un panier et a été dissocié.');
+            }
+
+            // Supprimer le produit
+            $em->remove($produit);
+            $em->flush();
+
+            $this->addFlash('success', 'Product has been deleted successfully.');
+        } else {
+            // CSRF token invalide
+            $this->addFlash('error', 'Invalid CSRF token. The product was not deleted.');
+        }
+
+        return $this->redirectToRoute('app_produit');
     }
 
 }

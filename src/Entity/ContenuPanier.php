@@ -20,7 +20,7 @@ class ContenuPanier
 
     #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Panier $Panier = null;
+    private ?Panier $panier = null;
 
     #[ORM\Column]
     private ?int $quantite = null;
@@ -47,12 +47,12 @@ class ContenuPanier
 
     public function getPanier(): ?Panier
     {
-        return $this->Panier;
+        return $this->panier;
     }
 
     public function setPanier(?Panier $Panier): static
     {
-        $this->Panier = $Panier;
+        $this->panier = $Panier;
 
         return $this;
     }

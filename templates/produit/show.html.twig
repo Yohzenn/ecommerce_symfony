@@ -8,7 +8,18 @@
     <h2>{{produit.description}}</h2>
     <hr/>
     <p>{{produit.stock}}</p>
+    {% if is_granted('ROLE_USER') %}
+        <form action="{{ path('app_ajouter_panier', {'id': produit.id}) }}" method="post">
+            <button type="submit">Ajouter au panier</button>
+        </form>
+    {% else %}
+        <a href="{{path('app_register')}}"><p>Connecté vous si vous voulez acheter se produit</p></a>
+    {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
     <a href="{{path('app_produit_edit', {id:produit.id})}}">Modifier le prod</a>
+    <form action="{{path('app_produit_delete', {id: produit.id})}}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token('delete' ~ produit.id) }}">
+        <input type="submit" value="Delete">
+    </form>
     {% endif %}
 {% endblock %}
