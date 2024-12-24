@@ -6,7 +6,20 @@
     {% if is_granted('ROLE_ADMIN') %}
     <h1>Modifier le produit</h1>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+    
+    {# Afficher l'image actuelle si elle existe #}
+    {% if produit.photo %}
+        <div>
+            <img src="{{ asset('uploads/' ~ produit.photo) }}" alt="Image actuelle du produit" width="150">
+            <p>Image actuelle</p>
+        </div>
+    {% endif %}
+
+    {{ form_row(form.photo) }}  {# Affiche le champ de téléchargement de l'image #}
+
     <a href="{{ path('app_produit') }}" >Retour à la liste des produits</a>
+
+    {{ form_end(form) }}
     {% endif %}
 {% endblock %}

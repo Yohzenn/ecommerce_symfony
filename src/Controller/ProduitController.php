@@ -72,6 +72,15 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    public function removeImage(string $imageName): void
+    {
+        $imagePath = $this->getParameter('upload_directory') . '/' . $imageName;
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath); // Suppression du fichier
+        }
+    }
+
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/produit/{id}/modifier', name: 'app_produit_edit')]
     public function editProduct(Produit $produit, Request $request, EntityManagerInterface $em): Response
@@ -79,7 +88,34 @@ class ProduitController extends AbstractController
         $form = $this->createForm(ProduitAddType::class, $produit);
         $form->handleRequest($request);
 
+        // Sauvegarde de l'image existante
+        $currentImage = $produit->getPhoto();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer le fichier image téléchargé
+            $imageFile = $form->get('photo')->getData();
+
+            if ($imageFile) {
+                // Supprimer l'ancienne image si une nouvelle image est téléchargée
+                if ($currentImage) {
+                    $this->removeImage($currentImage);  // Suppression de l'ancienne image
+                }
+
+                // Gérer la nouvelle image (enregistrer le fichier sur le serveur et mettre à jour la base de données)
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('upload_directory'),
+                        $newFilename
+                    );
+                    $produit->setPhoto($newFilename);  // Mise à jour du nom de l'image dans la base de données
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Impossible d\'ajouter l\'image');
+                    return $this->redirectToRoute('app_produit');
+                }
+            }
+
             $em->flush();
             $this->addFlash('success', 'Produit modifié avec succès.');
             return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
@@ -87,8 +123,10 @@ class ProduitController extends AbstractController
 
         return $this->render('produit/edit.html.twig', [
             'form' => $form->createView(),
+            'produit' => $produit,
         ]);
     }
+
 
     #[Route('/produit/{id}/delete', name: 'app_produit_delete')] 
     public function delete(Request $request, EntityManagerInterface $em, Produit $produit = null)
