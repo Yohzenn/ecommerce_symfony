@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le produit{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <h1>Modifier le produit</h1>
+
+    {{ form(form) }}
+    <a href="{{ path('app_produit') }}" >Retour à la liste des produits</a>
+    {% endif %}
+{% endblock %}

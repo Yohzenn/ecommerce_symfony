@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% if is_granted('ROLE_USER') %}
+        <p>Vous êtes déjà connecté. Vous allez être redirigé vers la page produit.</p>
+    {% else %}
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.nom, {
+            label: 'Nom'
+        }) }}
+        {{ form_row(registrationForm.prenom, {
+            label: 'Prenom'
+        }) }}
+        {{ form_row(registrationForm.email, {
+            label: 'Email'
+        }) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+    {% endif %}
+
+{% endblock %}

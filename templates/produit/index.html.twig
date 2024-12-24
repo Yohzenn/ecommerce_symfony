@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Tout les produits{% endblock %}
+ 
+{% block header %}
+<ul>
+    <li>Logo</li>
+    <li><a href="{{path('app_produit_show', {id:produit.id})}}">Mon profil</a></li>
+</ul>
+
+{% endblock %}
+{% block body %}
+
+    <h1>Produits</h1>
+ 
+    {% for produit in produits %}
+        <a href="{{path('app_produit_show', {id:produit.id})}}">
+            <h2>{{produit.nom}}</h2>
+            <p>{{produit.description}}</p>
+            {% if produit.photo is not empty %}
+                <img src="{{asset('/uploads/' ~ produit.photo)}}" alt="" style="max-width:100px">
+            {% endif %}
+        </a>
+        <hr/>
+    {% else %}
+        <p>Aucun produit disponible</p>
+    {% endfor %}
+    {% if is_granted('ROLE_ADMIN') %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <h2><a href="{{path('app_produit_add')}}">Ajouter un prod</a></h2>
+        {% endif %}
+    {% endif %}
+{% endblock %}
