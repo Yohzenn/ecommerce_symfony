@@ -3,6 +3,7 @@
   padding: 0;
 }
 body {
+  position: relative;
   overflow-x: hidden;
 }
 
@@ -60,6 +61,7 @@ h1 {
 
 .card {
   padding: 20px;
+  margin: 10px 0;
   width: 30vw;
   height: 50vh;
   background-color: #333;
@@ -99,4 +101,93 @@ h1 {
   top: 85vh;
   left: 95vw;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Formulaire */
+.form_container {
+  margin: 20px 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.form_container form {
+  background: rgb(51, 51, 51, 0.2);
+  border-radius: 15px;
+  border: solid #333 2px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  color: #fff;
+}
+
+.form_container form #produit_add div {
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.form_container form #produit_add div input,
+.form_container form #produit_add div textarea {
+  width: 20vw;
+}
+
+.back {
+  text-decoration: none;
+  margin: 0 20px;
+  padding: 10px 20px;
+  color: #ddd;
+  background: #333;
+  font-size: 16px;
+}
+
+/* Pour le bg */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 0, 0, 0.6);
+  top: 20%;
+  left: 10%;
+}
+
+.circle-2 {
+  width: 250px;
+  height: 250px;
+  background: rgba(0, 255, 0, 0.6);
+  top: 40%;
+  left: 50%;
+}
+
+.circle-3 {
+  width: 350px;
+  height: 350px;
+  background: rgba(0, 0, 255, 0.6);
+  top: 70%;
+  right: 10%;
+}
+
+.circle-4 {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 0, 0.6);
+  top: 60%;
+  left: 20%;
+}
+
+.circle-5 {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 165, 0, 0.6);
+  top: 30%;
+  right: 20%;
 }

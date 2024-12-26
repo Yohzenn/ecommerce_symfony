@@ -3,10 +3,17 @@
 {% block title %}{{ 'add_product'|trans }}{% endblock %}
 
 {% block body %}
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+    <div class="circle circle-5"></div>
     {% if is_granted('ROLE_ADMIN') %}
-    <h1></h1>
+    <h1>{{ 'add_product'|trans }}</h1>
     
-    {{ form(form) }}
-    <a href="{{ path('app_produit') }}" >{{ 'back_product'|trans }}</a>
+    <div class='form_container'>
+        {{ form(form) }}
+    </div>
+    <a class='back' href="{{ path('app_produit') }}" >{{ 'back_product'|trans }}</a>
     {% endif %}
 {% endblock %}
