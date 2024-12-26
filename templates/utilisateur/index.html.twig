@@ -6,22 +6,34 @@
     {% if not is_granted('ROLE_USER') %}
         <p>{{ 'connexion_required'|trans }}</p>
     {% endif %}
-    <div class='user-info-container'>
     <h1>{{ 'hello'|trans }} {{utilisateur.nom}}</h1>
-    <p>{{ 'welcome'|trans }}</p>
+    <div class='user-info-container'>
+    <div class="info-container">
+    <h2>{{ 'welcome'|trans }}</h2>
+    <h2>{{utilisateur.prenom}} {{utilisateur.nom}}</h2>
+    <p>{{utilisateur.email}}</p>
     <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
-    <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
-
+    </div>
+    <div class="commande-container">
     <h2>Vos commandes</h2>
-        <ul>
+        <table>
             {% set i = 0 %}
+            <tr>
+                <th>ID: </th>
+                <th>Total : </th>
+                <th>Date : </th>
+                <th>Details : </th>
+            </tr>
             {% for commande in commandes %}
-                <li><p>ID: {{ commande.id }}</p></li>
-                <li><p>Total : {{ prixTotal[i] }}</p></li> 
-                <li><p>Date : {{ commande.dateAchat|date('d/m/Y H:i') }}</p></li>
-                <li><a href="{{ path('app_commande_show', {'id': commande.id}) }}">{{ 'details'|trans }}</a></li>
+            <tr>
+                <td>{{ commande.id }}</td>
+                <td>{{ prixTotal[i] }} €</td>
+                <td>{{ commande.dateAchat|date('d/m/Y H:i') }}</td>
+                <td><a href="{{ path('app_commande_show', {'id': commande.id}) }}">{{ 'details'|trans }}</a></td>
                 {% set i = i + 1 %}
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
+    </div>    
     </div>
 {% endblock %}

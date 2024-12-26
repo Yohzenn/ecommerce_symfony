@@ -329,3 +329,61 @@ h1 {
   align-items: center;
   gap: 12px;
 }
+
+.user-info-container {
+  display: flex;
+  width: 90vw;
+  padding: 10px 10vw;
+  gap: 20px;
+  color: #ddd;
+}
+
+.info-container {
+  background-color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30%;
+  height: 30vh;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.info-container a {
+  text-align: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #333;
+  background-color: #ddd;
+}
+
+.commande-container {
+  text-align: center;
+  width: 54%;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.commande-container h2 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 3px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+td a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: bold;
+}
