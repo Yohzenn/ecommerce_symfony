@@ -25,10 +25,11 @@ class Panier
     /**
      * @var Collection<int, ContenuPanier>
      */
-    #[ORM\OneToMany(targetEntity: ContenuPanier::class, mappedBy: 'Panier')]
+    #[ORM\OneToMany(targetEntity: ContenuPanier::class, mappedBy: 'panier')] // Changer 'Panier' par 'panier'
     private Collection $contenuPaniers;
 
-    #[ORM\OneToOne(mappedBy: 'Panier', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $utilisateur = null;
 
     public function __construct()
@@ -102,16 +103,6 @@ class Panier
 
     public function setUtilisateur(?Utilisateur $utilisateur): static
     {
-        // unset the owning side of the relation if necessary
-        if ($utilisateur === null && $this->utilisateur !== null) {
-            $this->utilisateur->setPanier(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($utilisateur !== null && $utilisateur->getPanier() !== $this) {
-            $utilisateur->setPanier($this);
-        }
-
         $this->utilisateur = $utilisateur;
 
         return $this;

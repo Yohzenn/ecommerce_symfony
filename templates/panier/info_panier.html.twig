@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+ 
+{% block title %}Votre panier{% endblock %}
+ 
+{% block body %}
+
+    <h1>Panier en cours</h1>
+    {% if not found %}
+        <p>{{message}}</p>
+    {% else %}
+            <ul>
+        {% for produit in produits %}
+            <li>
+                <p>{{ produit.nom }}</p>
+                <p>{{ produit.prix }}</p>
+                <p>{{ produit.quantite }}</p>
+                <p>{{produit.prix * produit.quantite}}</p>
+                <a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}">Supprimer</a>
+            </li>
+        {% endfor %}
+            </ul>
+        
+        <p>Total : {{ prixTotal }}</p>
+        <a href="{{ path('app_payer_panier')}}">Acheter</a>
+    {% endif %}
+    
+{% endblock %}

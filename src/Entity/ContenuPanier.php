@@ -18,7 +18,8 @@ class ContenuPanier
     #[ORM\JoinColumn(nullable: false)]
     private ?Produit $produit = null;
 
-    #[ORM\ManyToOne(inversedBy: 'contenuPaniers')]
+
+    #[ORM\ManyToOne(targetEntity: Panier::class, inversedBy: 'contenuPaniers')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Panier $panier = null;
 

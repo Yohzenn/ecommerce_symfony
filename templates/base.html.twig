@@ -12,6 +12,14 @@
         {% endblock %}
     </head>
     <body>
+        {% block header %}
+        <nav>
+            <ul>
+                <li>Logo</li>
+                <li><a href="{{path('app_register')}}">Mon compte</a></li>
+            </ul>
+        </nav>
+        {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>

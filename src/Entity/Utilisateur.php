@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,13 +36,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Nom = null;
+    private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Prenom = null;
+    private ?string $prenom = null;
 
-    #[ORM\OneToOne(inversedBy: 'utilisateur', cascade: ['persist', 'remove'])]
-    private ?Panier $panier = null;
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Panier::class, orphanRemoval: true)]
+    private Collection $paniers;
 
     public function getId(): ?int
     {
@@ -119,36 +121,51 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
     public function setNom(string $Nom): static
     {
-        $this->Nom = $Nom;
+        $this->nom = $Nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
     public function setPrenom(string $Prenom): static
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $Prenom;
+
+        return $this;
+    }
+    
+    public function getPaniers(): Collection
+    {
+        return $this->paniers;
+    }
+
+    public function addPanier(Panier $panier): static
+    {
+        if (!$this->paniers->contains($panier)) {
+            $this->paniers->add($panier);
+            $panier->setUtilisateur($this);
+        }
 
         return $this;
     }
 
-    public function getPanier(): ?Panier
+    public function removePanier(Panier $panier): static
     {
-        return $this->panier;
-    }
-
-    public function setPanier(?Panier $Panier): static
-    {
-        $this->Panier = $Panier;
+        if ($this->paniers->removeElement($panier)) {
+            // set the owning side to null (unless already changed)
+            if ($panier->getUtilisateur() === $this) {
+                $panier->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }
