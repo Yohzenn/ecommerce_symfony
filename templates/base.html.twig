@@ -23,9 +23,9 @@
             </ul>
         </nav>
         {% endblock %}
-                {% for type, messages in app.flashes %}
+        {% for type, messages in app.flashes %}
             {% for msg in messages %}
-                <p>{{ type }} : {{ msg }}</p>
+                <p class="{{ type == 'success' ? 'success' : 'error' }}">{{ type }} : {{ msg }}</p>
             {% endfor %}
         {% endfor %}
         {% block body %}{% endblock %}

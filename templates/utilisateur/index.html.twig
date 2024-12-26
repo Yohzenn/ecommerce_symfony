@@ -6,6 +6,7 @@
     {% if not is_granted('ROLE_USER') %}
         <p>{{ 'connexion_required'|trans }}</p>
     {% endif %}
+    <div class='user-info-container'>
     <h1>{{ 'hello'|trans }} {{utilisateur.nom}}</h1>
     <p>{{ 'welcome'|trans }}</p>
     <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
@@ -22,4 +23,5 @@
                 {% set i = i + 1 %}
             {% endfor %}
         </ul>
+    </div>
 {% endblock %}

@@ -9,10 +9,10 @@ body {
 }
 /* message flash */
 .error {
-  position: absolute;
   background-color: red;
+  position: absolute;
   top: -60px;
-  left: 50vw;
+  left: 50%;
   color: white;
   border-radius: 0 0 10px 10px;
   padding: 30px 10px 10px 10px;
@@ -23,7 +23,7 @@ body {
   background-color: green;
   position: absolute;
   top: -60px;
-  left: 50vw;
+  left: 50%;
   color: white;
   border-radius: 0 0 10px 10px;
   padding: 30px 10px 10px 10px;
@@ -33,16 +33,16 @@ body {
 
 @keyframes apparition {
   0% {
-    transform: translate(0, 0px);
+    transform: translate(-30%, 0px);
   }
   20% {
-    transform: translate(0, 60px);
+    transform: translate(-30%, 60px);
   }
   80% {
-    transform: translate(0, 60px);
+    transform: translate(-30%, 60px);
   }
   100% {
-    transform: translate(0, 0px);
+    transform: translate(-30%, 0px);
   }
 }
 
@@ -173,7 +173,11 @@ h1 {
 .form_container form #produit_add div textarea {
   width: 20vw;
 }
-
+.form_container form #produit_add div button {
+  width: 100%;
+  height: 5vh;
+  border-radius: 10px;
+}
 .back {
   text-decoration: none;
   margin: 0 20px;
