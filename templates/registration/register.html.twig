@@ -26,6 +26,8 @@
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    <h2>Ou se connecté</h2>
+    <a href="{{ path('app_login') }}"><p>Se connecter</p></a>
     {% endif %}
 
 {% endblock %}

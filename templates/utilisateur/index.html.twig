@@ -3,18 +3,23 @@
 {% block title %}Hello UtilisateurController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% if not is_granted('ROLE_USER') %}
+        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+    {% endif %}
+    <h1>Hello, {{utilisateur.nom}}</h1>
+    <p>Bienvenue sur notre site e-commerce!</p>
+    <a href="{{ path('app_logout') }}">Modifier vos informations</a>
+    <a href="{{ path('app_logout') }}">Logout</a>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/ecommerce_symfony/src/Controller/UtilisateurController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/ecommerce_symfony/templates/utilisateur/index.html.twig</code></li>
-    </ul>
-</div>
+    <h2>Vos commandes</h2>
+        <ul>
+            {% set i = 0 %}
+            {% for commande in commandes %}
+                <li><p>ID de la commande : {{ commande.id }}</p></li>
+                <li><p>Prix total : {{ prixTotal[i] }}</p></li> <!-- Assurez-vous que prixTotal est bien passé à la vue -->
+                <li><p>Date de la commande : {{ commande.dateAchat|date('d/m/Y H:i') }}</p></li>
+                <li><a href="{{ path('app_commande_show', {'id': commande.id}) }}">Voir les détails</a></li>
+                {% set i = i + 1 %}
+            {% endfor %}
+        </ul>
 {% endblock %}

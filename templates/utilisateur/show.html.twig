@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la commande{% endblock %}
+
+{% block body %}
+    {% if not is_granted('ROLE_USER') %}
+        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+    {% endif %}
+
+    <h1>Détails de la commande #{{ commande.id }}</h1>
+
+    <p><strong>Date d'achat:</strong> {{ commande.dateAchat|date('d/m/Y H:i') }}</p>
+    <p><strong>Etat:</strong> {{ commande.etat ? 'Payée' : 'Non payée' }}</p>
+
+    <h2>Produits dans la commande</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contenu in commande.contenuPaniers %}
+                <tr>
+                    <td>{{ contenu.produit.nom }}</td>
+                    <td>{{ contenu.quantite }}</td>
+                    <td>{{ contenu.produit.prix }} €</td>
+                    <td>{{ contenu.produit.prix * contenu.quantite }} €</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Total de la commande : {{ prixTotal }} €</h3>
+
+    <a href="{{ path('app_utilisateur', {'id': commande.utilisateur.id}) }}">Retour à vos commandes</a>
+
+{% endblock %}

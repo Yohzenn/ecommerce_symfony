@@ -9,17 +9,17 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Produit;
 use App\Entity\Panier;
 use App\Entity\ContenuPanier;
-use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 class PanierController extends AbstractController
 {
 
-    #[Route('/produit/info_panier', name: 'app_info_panier')]
+    #[Route('/info_panier', name: 'app_info_panier')]
     public function infoPanier(EntityManagerInterface $em): Response
     {
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
             // Si l'utilisateur n'est pas connecté, rediriger vers la page de login
+            $this->addFlash('error', 'Connection requise');
             return $this->redirectToRoute('app_login');
         }
 
@@ -50,6 +50,7 @@ class PanierController extends AbstractController
             ]);
         }
 
+        // Récuperer le prix Total des produits du panier
         $contenus = $panierActif->getContenuPaniers();
         $detailsProduits = [];
         $prixTotal = 0;
@@ -75,7 +76,7 @@ class PanierController extends AbstractController
 
 
 
-    #[Route('/produit/{id}/ajouter-au-panier', name: 'app_ajouter_panier')]
+    #[Route('/ajouter_panier/{id}', name: 'app_ajouter_panier')]
     public function ajouterAuPanier(Produit $produit, EntityManagerInterface $em)
     {
         // Vérifier si l'utilisateur est connecté
@@ -131,7 +132,7 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
     }
 
-    #[Route('/produit/supprimer/{id}', name: 'app_supprimer_panier')]
+    #[Route('/supprimer/{id}', name: 'app_supprimer_panier')]
     public function supprimer(int $id, EntityManagerInterface $em)
     {
         // Vérifier si l'utilisateur est connecté
@@ -180,7 +181,7 @@ class PanierController extends AbstractController
         return $this->redirectToRoute('app_info_panier');
     }    
 
-    #[Route('/produit/payer', name: 'app_payer_panier')]
+    #[Route('/payer', name: 'app_payer_panier')]
     public function payerPanier(EntityManagerInterface $em){
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
@@ -206,10 +207,53 @@ class PanierController extends AbstractController
 
         // Modifier l'état du panier à payé
         $panierActif->setEtat(true);
+        $panierActif->setDateAchat(new \DateTime());
         $em->persist($panierActif);
         $em->flush();
 
         // Rediriger vers la page de confirmation de paiement
-        return $this->render('app_produit');
+        return $this->render('panier/info_panier.html.twig', [
+            'found' => false,
+            'message' => 'Vous n\'avez pas d\'article dans votre panier.',
+        ]);
     }
+
+    #[Route('/utilisateur/commande/{id}', name: 'app_commande_show')]
+    public function showCommande(int $id, EntityManagerInterface $em)
+    {
+        // Vérifier si l'utilisateur est connecté
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Récupérer l'utilisateur connecté
+        $utilisateur = $this->getUser();
+
+        // Récupérer la commande spécifique de l'utilisateur
+        $commande = $em->getRepository(Panier::class)->findOneBy([
+            'utilisateur' => $utilisateur,
+            'id' => $id
+        ]);
+
+        // Vérifier si la commande existe
+        if (!$commande) {
+            // Si la commande n'est pas trouvée, rediriger vers la liste des commandes
+            return $this->redirectToRoute('app_utilisateur');
+        }
+
+        $contenus = $commande->getContenuPaniers();
+        $prixTotal = 0;
+        foreach ($contenus as $contenu) {
+            $produit = $contenu->getProduit();
+            $prixTotal += $produit->getPrix() * $contenu->getQuantite();
+        }
+
+        // Passer la commande à la vue pour affichage
+        return $this->render('utilisateur/show.html.twig', [
+            'commande' => $commande,
+            'prixTotal' => $prixTotal,
+        ]);
+    }
+
+
 }

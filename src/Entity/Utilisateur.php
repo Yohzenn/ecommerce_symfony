@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -44,6 +45,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Panier::class, orphanRemoval: true)]
     private Collection $paniers;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateInscription = null;
+
+    public function __construct()
+    {
+        $this->dateInscription = new \DateTime(); 
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -166,6 +174,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $panier->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    {
+        $this->dateInscription = $dateInscription;
 
         return $this;
     }

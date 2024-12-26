@@ -3,6 +3,9 @@
 {% block title %}Votre panier{% endblock %}
  
 {% block body %}
+    {% if not is_granted('ROLE_USER') %}
+        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+    {% endif %}
 
     <h1>Panier en cours</h1>
     {% if not found %}

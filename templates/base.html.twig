@@ -13,13 +13,19 @@
     </head>
     <body>
         {% block header %}
+
         <nav>
             <ul>
                 <li>Logo</li>
-                <li><a href="{{path('app_register')}}">Mon compte</a></li>
+                <li><a href="{{path('app_utilisateur')}}">Mon compte</a></li>
             </ul>
         </nav>
         {% endblock %}
+                {% for type, messages in app.flashes %}
+            {% for msg in messages %}
+                <p>{{ type }} : {{ msg }}</p>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </body>
 </html>
