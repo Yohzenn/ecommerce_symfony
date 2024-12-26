@@ -3,24 +3,38 @@
 {% block title %}{{produit.nom}}{% endblock %}
  
 {% block body %}
-    <h1>{{produit.nom}}</h1>
- 
-    <h2>{{produit.description}}</h2>
-    <hr/>
+    <div class="product-container">
+    <img src="{{asset('/uploads/' ~ produit.photo)}}" alt="">
+    <div class="product-info">
+    <h2>{{produit.nom}}</h2>
+    <p class='price'>{{ produit.prix }} €</p>
+    <hr>
+    <p>{{produit.description}}</p>
     <p>{{produit.stock}}</p>
+    <hr>
     {% if is_granted('ROLE_USER') %}
-        <form action="{{ path('app_ajouter_panier', {'id': produit.id}) }}" method="post">
-            <button type="submit">{{ 'add_product'|trans }}</button>
-        </form>
+        <div class="add-container">
+            <p>1</p>
+            <form action="{{ path('app_ajouter_panier', {'id': produit.id}) }}" method="post">
+                <button type="submit">{{ 'add_product'|trans }}</button>
+            </form>
+        </div>
     {% else %}
         <a href="{{path('app_register')}}"><p>{{ 'payment'|trans }}</p></a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{path('app_produit_edit', {id:produit.id})}}">{{ 'modified_product'|trans }}</a>
+    <hr>
+    <div class="admin-product">
+    <a href="{{path('app_produit_edit', {id:produit.id})}}"><i class="fa-solid fa-pen" style="color: blue;"></i></a>
     <form action="{{path('app_produit_delete', {id: produit.id})}}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token('delete' ~ produit.id) }}">
-        <input type="submit" value="Delete">
+        <button type="submit" style="background: transparent; border: none; cursor: pointer;">
+            <i class="fa-solid fa-xmark" style="font-size: 24px; color: red;"></i>
+        </button>
     </form>
+    </div>
     {% endif %}
-    <a href="{{ path('app_produit') }}">{{ 'back_product'|trans }} </a>
+    </div>
+    </div>
+    <a href="{{ path('app_produit') }}" class='back'>{{ 'back_product'|trans }} </a>
 {% endblock %}

@@ -191,3 +191,98 @@ h1 {
   top: 30%;
   right: 20%;
 }
+
+/* Product */
+
+.product-container {
+  display: flex;
+  padding: 50px 100px 10px 100px;
+  justify-content: center;
+}
+
+.product-container img {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.product-container .product-info {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  color: #333;
+  padding-left: 50px;
+}
+
+.product-container .product-info h2 {
+  font-size: 3rem;
+  font-style: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.product-container .product-info p {
+  font-size: 1rem;
+  color: #333;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.product-container .product-info hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+  margin: 20px 0;
+  border-radius: 5px;
+}
+.product-container .product-info .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e84a5f;
+  opacity: 1;
+  height: fit-content;
+}
+
+.add-container {
+  display: flex;
+  align-items: center;
+  color: #333;
+  padding-left: 50px;
+}
+.add-container p {
+  border: 3px solid #333;
+  margin: 0 !important;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+.add-container form,
+.add-container form button {
+  margin-left: 10px;
+  height: 100%;
+  padding: 0 10px;
+}
+
+.add-container form button {
+  margin-left: 10px;
+  height: 100%;
+  padding: 0 10px;
+  border: 3px solid #333;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #ddd;
+  background-color: #333;
+}
+
+.admin-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
