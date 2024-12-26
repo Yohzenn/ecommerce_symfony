@@ -1,26 +1,27 @@
 {% extends 'base.html.twig' %}
+
  
 {% block title %}Cann'Shop{% endblock %}
  
 {% block body %}
 
     <h1>{{ 'products'|trans }}</h1>
- 
+    <div class='card_container'>
     {% for produit in produits %}
-        <a href="{{path('app_produit_show', {id:produit.id})}}">
-            <h2>{{produit.nom}}</h2>
-            <p>{{produit.description}}</p>
-            {% if produit.photo is not empty %}
-                <img src="{{asset('/uploads/' ~ produit.photo)}}" alt="" style="max-width:100px">
-            {% endif %}
-        </a>
-        <hr/>
+        <div class='card'>
+            <a href="{{path('app_produit_show', {id:produit.id})}}">
+                {% if produit.photo is not empty %}
+                    <img src="{{asset('/uploads/' ~ produit.photo)}}" alt="">
+                {% endif %}
+                <h2>{{produit.nom}}</h2>
+                <p>{{produit.description}}</p>
+            </a>
+        </div>
     {% else %}
         <p>{{ 'no_products'|trans }}</p>
     {% endfor %}
+    </div>
     {% if is_granted('ROLE_ADMIN') %}
-        {% if is_granted('ROLE_ADMIN') %}
-            <h2><a href="{{path('app_produit_add')}}">{{ 'add_product'|trans }}</a></h2>
-        {% endif %}
+        <h2><a class='add_product-data' href="{{path('app_produit_add')}}"><i class="fa-solid fa-plus"></i></a></h2>
     {% endif %}
 {% endblock %}

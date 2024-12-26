@@ -2,10 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <script src="https://kit.fontawesome.com/ec35368b02.js" crossorigin="anonymous"></script>
+
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
@@ -16,8 +15,11 @@
 
         <nav>
             <ul>
-                <li>Logo</li>
-                <li><a href="{{path('app_utilisateur')}}">Mon compte</a></li>
+                <li><a class='logo' href="{{path('app_produit')}}">Cann'Shop</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{path('app_super')}}"><i class="fa-solid fa-user-secret"></i></a></li>
+                {% endif %}
+                <li><a href="{{path('app_utilisateur')}}"><i class="fa-solid fa-user"></i></a></li>
             </ul>
         </nav>
         {% endblock %}
@@ -28,4 +30,5 @@
         {% endfor %}
         {% block body %}{% endblock %}
     </body>
+    
 </html>
