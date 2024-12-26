@@ -11,13 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         if ($this->getUser()) {
+            $this->addFlash('error', $translator->trans('error.connexion'));
             return $this->redirectToRoute('app_produit');
         }
         $user = new Utilisateur();
@@ -38,7 +40,7 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             $security->login($user, authenticatorName: 'form_login');
-            $this->addFlash('success', 'Utilisateur créé avec succès!)');
+            $this->addFlash('success', $translator->trans('success.user_added'));
             return $this->redirectToRoute('app_produit');
 
         }

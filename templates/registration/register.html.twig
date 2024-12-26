@@ -1,33 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ 'inscription_page'|trans }}{% endblock %}
 
 {% block body %}
     {% if is_granted('ROLE_USER') %}
-        <p>Vous êtes déjà connecté. Vous allez être redirigé vers la page produit.</p>
+        <p>{{ 'connexion_required'|trans }}</p>
     {% else %}
-    <h1>Register</h1>
+    <h1>{{ 'inscription_page'|trans }}</h1>
 
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom, {
-            label: 'Nom'
+            label: {{ 'nom'|trans }}
         }) }}
         {{ form_row(registrationForm.prenom, {
-            label: 'Prenom'
+            label: {{ 'prenom'|trans }}
         }) }}
         {{ form_row(registrationForm.email, {
-            label: 'Email'
+            label: {{ 'email'|trans }}
         }) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+            label: {{ 'password'|trans }}
         }) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">{{ 'inscription_page'|trans }}</button>
     {{ form_end(registrationForm) }}
-    <h2>Ou se connecté</h2>
-    <a href="{{ path('app_login') }}"><p>Se connecter</p></a>
+    <h2>{{ 'other.connexion'|trans }}</h2>
+    <a href="{{ path('app_login') }}"><p>{{ 'connexion_page'|trans }}</p></a>
     {% endif %}
 
 {% endblock %}

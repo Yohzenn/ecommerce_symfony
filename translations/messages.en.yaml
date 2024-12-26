@@ -1,0 +1,65 @@
+error:
+  connexion_required: You need to log in! You will be redirected.
+  connexion: You are already logged in.
+  panier_vide: You have no items in your cart.
+  suppr: The product could not be deleted.
+  payement: The payment did not go through.
+  show_command: The order was not found.
+  image: Error while uploading the image.
+  csrf: Invalid CSRF token.
+  h1: Unable to display the page.
+  generique: Oops, an error occurred, please try again.
+  403: Oops, an error occurred.
+  404: Oops, this page does not exist.
+  500: You do not have the necessary rights to access the page.
+
+success:
+  product_add: The product has been successfully added.
+  suppr: The product has been successfully deleted.
+  payement: Your payment has been successfully processed.
+  produit_added: The product has been successfully added.
+  produit_modified: The product has been successfully modified.
+  user_added: Your account has been successfully created.
+  deconnexion: You have successfully logged out.
+
+label:
+  nom: "Name"
+  prenom: "First Name"
+  email: "Email"
+  password: "Password"
+
+panier: Your cart
+supprimer: Delete
+acheter: Buy
+add_product: Add a product
+back_product: Back to the product list
+modified_product: Edit a product
+image_actuel: Current image
+products: All available products
+no_products: No products available
+payment: Log in if you want to buy this product
+connexion_page: Log in
+inscription_page: Sign up
+logged_out: Log out
+logged_as: You are logged in as
+hello: Hello,
+welcome: Welcome to Cann'Shop!
+modified_account: Edit your information
+details: View details
+detail: Order details
+show:
+  products: Products in the order
+  product: Product
+  quantité: Quantity
+  prix: Unit price
+
+other:
+  connexion: Or log in
+  creation: Or create an account
+
+admin:
+  new: Users registered today
+  no_new: No users registered today.
+  panier: Unpurchased carts
+  no_panier: No unpurchased carts.
+  crea_date: Creation date

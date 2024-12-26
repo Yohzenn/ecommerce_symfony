@@ -1,7 +1,7 @@
 {% extends "errors.html.twig" %}
 
 {% block body %}
-<h1>Erreur</h1>
-<p>OOPS, cette page n'existe pas</p>
+<h1>{{ 'error.h1'|trans }}</h1>
+<p>{{ 'error.404'|trans }}</p>
 
 {% endblock %}

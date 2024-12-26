@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
  
-{% block title %}Votre panier{% endblock %}
+{% block title %}{{ 'panier'|trans }}{% endblock %}
  
 {% block body %}
     {% if not is_granted('ROLE_USER') %}
-        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+        <p>{{ 'error.connexion_required'|trans }}</p>
     {% endif %}
 
-    <h1>Panier en cours</h1>
+    <h1>{{ 'panier'|trans }}</h1>
     {% if not found %}
         <p>{{message}}</p>
     {% else %}
@@ -18,13 +18,13 @@
                 <p>{{ produit.prix }}</p>
                 <p>{{ produit.quantite }}</p>
                 <p>{{produit.prix * produit.quantite}}</p>
-                <a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}">Supprimer</a>
+                <a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}">{{ 'supprimer'|trans }}</a>
             </li>
         {% endfor %}
             </ul>
         
         <p>Total : {{ prixTotal }}</p>
-        <a href="{{ path('app_payer_panier')}}">Acheter</a>
+        <a href="{{ path('app_payer_panier')}}">{{ 'acheter'|trans }}</a>
     {% endif %}
     
 {% endblock %}

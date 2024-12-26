@@ -1,4 +1,65 @@
-hello: Hello
+error:
+  connexion_required: Il faut vous connecter ! Vous allez être redirigé.
+  connexion: Vous êtes déjà connecté.
+  panier_vide: Vous n'avez pas d'article dans votre panier.
+  suppr: Le produit n'a pas pu être supprimé.
+  payement: Le paiement n'a pas eu lieu.
+  show_command: La commande n'a pas été trouvée.
+  image: Erreur lors du chargement de l'image.
+  csrf: CSRF token invalide.
+  h1: Impossible d'afficher la page.
+  generique: Oups, une erreur est survenue, veuillez réessayer.
+  403: Oups, une erreur est survenue.
+  404: Oups, cette page n'existe pas.
+  500: Vous n'avez pas les droits nécessaires pour accéder à la page.
 
-category:
-  title: Categories
+success:
+  product_add: Le produit a bien été ajouté.
+  suppr: Le produit a bien été supprimé.
+  payement: Votre paiement a bien été effectué.
+  produit_added: Le produit a bien été ajouté.
+  produit_modified: Le produit a bien été modifié.
+  user_added: Votre compte a bien été ajouté.
+  deconnexion: Vous avez bien été déconnecté.
+
+label:
+  nom: "Nom"
+  prenom: "Prénom"
+  email: "Email"
+  password: "Mot de passe"
+
+panier: Votre panier
+supprimer: Supprimer
+acheter: Acheter
+add_product: Ajouter un produit
+back_product: Retour à la liste des produits
+modified_product: Modifier un produit
+image_actuel: Image actuelle
+products: Tous les produits disponibles
+no_products: Aucun produit disponible
+payment: Connectez-vous si vous voulez acheter ce produit
+connexion_page: Se connecter
+inscription_page: S'inscrire
+logged_out: Se déconnecter
+logged_as: Vous êtes connecté en tant que
+hello: Bonjour,
+welcome: Bienvenue sur Cann'Shop !
+modified_account: Modifier vos informations
+details: Voir les détails
+detail: Détails de la commande
+show:
+  products: Produits dans la commande
+  product: Produit
+  quantité: Quantité
+  prix: Prix unitaire
+
+other:
+  connexion: Ou se connecter
+  creation: Ou se créer un compte
+
+admin:
+  new: Utilisateurs inscrits aujourd'hui
+  no_new: Aucun utilisateur inscrit aujourd'hui.
+  panier: Paniers non achetés
+  no_panier: Aucun panier non acheté.
+  crea_date: Date de création

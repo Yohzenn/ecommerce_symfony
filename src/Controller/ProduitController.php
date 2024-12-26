@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ProduitController extends AbstractController
@@ -30,7 +31,7 @@ class ProduitController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route(path: '/add', name: 'app_produit_add')]
-    public function addProduct(Request $request, EntityManagerInterface $em): Response
+    public function addProduct(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitAddType::class, $produit);
@@ -48,7 +49,7 @@ class ProduitController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    $this->addFlash('error','Impossible d\'ajouter l\`image');
+                    $this->addFlash('error', $translator->trans('error.image'));
                     return $this->redirectToRoute('app_product');
                 }
  
@@ -56,7 +57,7 @@ class ProduitController extends AbstractController
             }
             $em->persist($produit);
             $em->flush();
-            $this->addFlash('success','Produit Ajouté');
+            $this->addFlash('success', $translator->trans('success.produit_added'));
             return $this->redirectToRoute('app_produit');
         }
         return $this->render('produit/add.html.twig', [
@@ -83,7 +84,7 @@ class ProduitController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/produit/{id}/modifier', name: 'app_produit_edit')]
-    public function editProduct(Produit $produit, Request $request, EntityManagerInterface $em): Response
+    public function editProduct(Produit $produit, Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(ProduitAddType::class, $produit);
         $form->handleRequest($request);
@@ -111,13 +112,13 @@ class ProduitController extends AbstractController
                     );
                     $produit->setPhoto($newFilename);  // Mise à jour du nom de l'image dans la base de données
                 } catch (FileException $e) {
-                    $this->addFlash('error', 'Impossible d\'ajouter l\'image');
+                    $this->addFlash('error', $translator->trans('error.image'));
                     return $this->redirectToRoute('app_produit');
                 }
             }
 
             $em->flush();
-            $this->addFlash('success', 'Produit modifié avec succès.');
+            $this->addFlash('success', $translator->trans('success.produit_modified'));
             return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
         }
 
@@ -129,10 +130,10 @@ class ProduitController extends AbstractController
 
 
     #[Route('/produit/{id}/delete', name: 'app_produit_delete')] 
-    public function delete(Request $request, EntityManagerInterface $em, Produit $produit = null)
+    public function delete(Request $request, EntityManagerInterface $em, Produit $produit = null, TranslatorInterface $translator)
     {
         if ($produit === null) {
-            $this->addFlash('error', 'Product not found.');
+            $this->addFlash('error', $translator->trans('error.produit_suppr'));
             return $this->redirectToRoute('app_produit');
         }
         
@@ -148,17 +149,16 @@ class ProduitController extends AbstractController
                     $em->remove($contenuPanier);
                 }
                 $em->flush();
-                $this->addFlash('warning', 'Le produit était dans un panier et a été dissocié.');
             }
 
             // Supprimer le produit
             $em->remove($produit);
             $em->flush();
 
-            $this->addFlash('success', 'Product has been deleted successfully.');
+            $this->addFlash('success', $translator->trans('success.produit_suppr'));
         } else {
             // CSRF token invalide
-            $this->addFlash('error', 'Invalid CSRF token. The product was not deleted.');
+            $this->addFlash('success', $translator->trans('error.csrf'));
         }
 
         return $this->redirectToRoute('app_produit');

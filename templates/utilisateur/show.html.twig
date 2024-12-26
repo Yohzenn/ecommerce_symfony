@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de la commande{% endblock %}
+{% block title %}{{ 'detail'|trans }}{% endblock %}
 
 {% block body %}
     {% if not is_granted('ROLE_USER') %}
-        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+        <p>{{ 'connexion_required'|trans }}</p>
     {% endif %}
 
-    <h1>Détails de la commande #{{ commande.id }}</h1>
+    <h1>{{ 'detail'|trans }} #{{ commande.id }}</h1>
 
-    <p><strong>Date d'achat:</strong> {{ commande.dateAchat|date('d/m/Y H:i') }}</p>
+    <p><strong>Date:</strong> {{ commande.dateAchat|date('d/m/Y H:i') }}</p>
     <p><strong>Etat:</strong> {{ commande.etat ? 'Payée' : 'Non payée' }}</p>
 
-    <h2>Produits dans la commande</h2>
+    <h2>{{ 'show.products'|trans }}</h2>
     <table>
         <thead>
             <tr>
-                <th>Produit</th>
-                <th>Quantité</th>
-                <th>Prix unitaire</th>
+                <th>{{ 'show.product'|trans }}</th>
+                <th>{{ 'show.quantité'|trans }}</th>
+                <th>{{ 'show.prix'|trans }}</th>
                 <th>Total</th>
             </tr>
         </thead>

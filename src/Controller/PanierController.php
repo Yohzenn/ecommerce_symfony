@@ -10,16 +10,18 @@ use App\Entity\Produit;
 use App\Entity\Panier;
 use App\Entity\ContenuPanier;
 use Doctrine\ORM\EntityManagerInterface;
+
+use Symfony\Contracts\Translation\TranslatorInterface;
 class PanierController extends AbstractController
 {
 
     #[Route('/info_panier', name: 'app_info_panier')]
-    public function infoPanier(EntityManagerInterface $em): Response
+    public function infoPanier(TranslatorInterface $translator): Response
     {
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
             // Si l'utilisateur n'est pas connecté, rediriger vers la page de login
-            $this->addFlash('error', 'Connection requise');
+            $this->addFlash('error', $translator->trans('error.connexion_required'));
             return $this->redirectToRoute('app_login');
         }
 
@@ -38,7 +40,7 @@ class PanierController extends AbstractController
         if (!$panierActif) {
             return $this->render('panier/info_panier.html.twig', [
                 'found' => false,
-                'message' => 'Vous n\'avez pas d\'article dans votre panier.',
+                'message' => $translator->trans('error.panier_vide'),
             ]);
         }
         
@@ -46,7 +48,7 @@ class PanierController extends AbstractController
         if ($panierActif->isEtat()) {
             return $this->render('panier/info_panier.html.twig', [
                 'found' => false,
-                'message' => 'Vous n\'avez pas d\'article dans votre panier.',
+                'message' => $translator->trans('error.panier_vide'),
             ]);
         }
 
@@ -65,6 +67,7 @@ class PanierController extends AbstractController
             $prixTotal += $produit->getPrix() * $contenu->getQuantite();
         }
 
+        // Afficher la page avec les détails du panier et le prix total
         return $this->render('panier/info_panier.html.twig', [
             'found' => true,
             'message' => 'Panier existant',
@@ -77,10 +80,11 @@ class PanierController extends AbstractController
 
 
     #[Route('/ajouter_panier/{id}', name: 'app_ajouter_panier')]
-    public function ajouterAuPanier(Produit $produit, EntityManagerInterface $em)
+    public function ajouterAuPanier(Produit $produit, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         // Vérifier si l'utilisateur est connecté
-        if (!$this->getUser()) {
+        if (!$this->getUser()) {            
+            $this->addFlash('error', $translator->trans('error.connexion_required'));
             return $this->redirectToRoute('app_login');
         }
 
@@ -129,14 +133,16 @@ class PanierController extends AbstractController
         $em->flush();
 
         // Rediriger vers la page de la fiche produit
+        $this->addFlash('success', $translator->trans('success.product_add'));
         return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
     }
 
     #[Route('/supprimer/{id}', name: 'app_supprimer_panier')]
-    public function supprimer(int $id, EntityManagerInterface $em)
+    public function supprimer(int $id, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
+            $this->addFlash('error', $translator->trans('error.connexion_required'));
             return $this->redirectToRoute('app_login');
         }
 
@@ -154,6 +160,7 @@ class PanierController extends AbstractController
 
         // Si aucun panier n'est trouvé, rediriger vers la page d'information du panier
         if (!$panier) {
+            $this->addFlash('error', $translator->trans('error.suppr'));
             return $this->redirectToRoute('app_info_panier');
         }
 
@@ -165,6 +172,7 @@ class PanierController extends AbstractController
 
         // Si l'article n'existe pas dans le panier, rediriger vers la page du panier
         if (!$contenuPanier) {
+            $this->addFlash('error', $translator->trans('error.suppr'));
             return $this->redirectToRoute('app_info_panier');
         }
 
@@ -178,13 +186,15 @@ class PanierController extends AbstractController
         }
 
         // Rediriger vers la page du panier
+        $this->addFlash('success', $translator->trans('success.suppr'));
         return $this->redirectToRoute('app_info_panier');
     }    
 
     #[Route('/payer', name: 'app_payer_panier')]
-    public function payerPanier(EntityManagerInterface $em){
+    public function payerPanier(EntityManagerInterface $em, TranslatorInterface $translator){
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
+            $this->addFlash('error', $translator->trans('error.connexion_required'));
             return $this->redirectToRoute('app_login');
         }
 
@@ -202,6 +212,7 @@ class PanierController extends AbstractController
 
         // Si aucun panier n'est trouvé, rediriger vers la page d'information du panier
         if (!$panierActif) {
+            $this->addFlash('error', $translator->trans('error.payement'));
             return $this->redirectToRoute('app_info_panier');
         }
 
@@ -211,7 +222,7 @@ class PanierController extends AbstractController
         $em->persist($panierActif);
         $em->flush();
 
-        // Rediriger vers la page de confirmation de paiement
+        $this->addFlash('success', $translator->trans('success.payment'));
         return $this->render('panier/info_panier.html.twig', [
             'found' => false,
             'message' => 'Vous n\'avez pas d\'article dans votre panier.',
@@ -219,10 +230,11 @@ class PanierController extends AbstractController
     }
 
     #[Route('/utilisateur/commande/{id}', name: 'app_commande_show')]
-    public function showCommande(int $id, EntityManagerInterface $em)
+    public function showCommande(int $id, EntityManagerInterface $em, TranslatorInterface $translator)
     {
         // Vérifier si l'utilisateur est connecté
         if (!$this->getUser()) {
+            $this->addFlash('error', $translator->trans('error.connexion_required'));
             return $this->redirectToRoute('app_login');
         }
 
@@ -238,6 +250,7 @@ class PanierController extends AbstractController
         // Vérifier si la commande existe
         if (!$commande) {
             // Si la commande n'est pas trouvée, rediriger vers la liste des commandes
+            $this->addFlash('error', $translator->trans('error.show_command'));
             return $this->redirectToRoute('app_utilisateur');
         }
 

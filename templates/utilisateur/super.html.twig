@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard Admin{% endblock %}
+{% block title %}Super Admin{% endblock %}
 
 {% block body %}
-    <h1>Tableau de bord Super Admin</h1>
+    <h1>Super Admin</h1>
 
-    <h2>Utilisateurs inscrits aujourd'hui</h2>
+    <h2>{{ 'admin.new'|trans }}</h2>
     <ul>
         {% for utilisateur in utilisateurs %}
             <li>
                 <p>{{ utilisateur.nom }} (Inscrit le: {{ utilisateur.dateInscription|date('d/m/Y H:i') }})</p>
             </li>
         {% else %}
-            <p>Aucun utilisateur inscrit aujourd'hui.</p>
+            <p>{{ 'admin.no_new'|trans }}</p>
         {% endfor %}
     </ul>
 
-    <h2>Paniers non achetés</h2>
+    <h2>{{ 'admin.panier'|trans }}</h2>
     <ul>
         {% set i = 0 %}
         {% for panier in paniersNonAchetes %}
             <li>
                 <p>{{utilisateursNonPayes[i].nom}}</p>
-                <p>Panier ID: {{ panier.id }} (Date d'achat: {{ panier.dateAchat|date('d/m/Y') }})</p>
+                <p>Panier ID: {{ panier.id }} ({{ 'admin.crea_date'|trans }}: {{ panier.dateAchat|date('d/m/Y') }})</p>
                 {% set i = i + 1 %}
             </li>
         {% else %}
-            <p>Aucun panier non acheté.</p>
+            <p>{{ 'admin.no_panier'|trans }}</p>
         {% endfor %}
     </ul>
 

@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UtilisateurController!{% endblock %}
+{% block title %}{{utilisateur.nom}}{% endblock %}
 
 {% block body %}
     {% if not is_granted('ROLE_USER') %}
-        <p>Vous n'êtes pas connecté. Vous allez être redirigé vers la page de connexion.</p>
+        <p>{{ 'connexion_required'|trans }}</p>
     {% endif %}
-    <h1>Hello, {{utilisateur.nom}}</h1>
-    <p>Bienvenue sur notre site e-commerce!</p>
-    <a href="{{ path('app_logout') }}">Modifier vos informations</a>
-    <a href="{{ path('app_logout') }}">Logout</a>
+    <h1>{{ 'hello'|trans }} {{utilisateur.nom}}</h1>
+    <p>{{ 'welcome'|trans }}</p>
+    <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
+    <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
 
     <h2>Vos commandes</h2>
         <ul>
             {% set i = 0 %}
             {% for commande in commandes %}
-                <li><p>ID de la commande : {{ commande.id }}</p></li>
-                <li><p>Prix total : {{ prixTotal[i] }}</p></li> <!-- Assurez-vous que prixTotal est bien passé à la vue -->
-                <li><p>Date de la commande : {{ commande.dateAchat|date('d/m/Y H:i') }}</p></li>
-                <li><a href="{{ path('app_commande_show', {'id': commande.id}) }}">Voir les détails</a></li>
+                <li><p>ID: {{ commande.id }}</p></li>
+                <li><p>Total : {{ prixTotal[i] }}</p></li> 
+                <li><p>Date : {{ commande.dateAchat|date('d/m/Y H:i') }}</p></li>
+                <li><a href="{{ path('app_commande_show', {'id': commande.id}) }}">{{ 'details'|trans }}</a></li>
                 {% set i = i + 1 %}
             {% endfor %}
         </ul>
