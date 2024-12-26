@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\Utilisateur;
+use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\PhpUnit\TextUI\Command;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -35,6 +38,22 @@ class UtilisateurController extends AbstractController
             'utilisateur' => $utilisateur,
             'commandes' => $commandes,
             'prixTotal' => $prixTotal,
+        ]);
+    }
+    
+    #[Route('/utilisateur/{id}/modifier', name: 'app_utilisateur_edit')]
+    public function editProduct(Utilisateur $utilisateur, Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    {
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
+        $form->handleRequest($request);
+        $em->flush();
+        if($form->isSubmitted() && $form->isValid()){
+            $this->addFlash('error', $translator->trans('success.user_modified'));
+            return $this->redirectToRoute('app_utilisateur');
+            
+        }
+        return $this->render('utilisateur/edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 

@@ -387,3 +387,56 @@ td a {
   color: #ddd;
   font-weight: bold;
 }
+
+/* Formulaire de connection */
+.form_container form div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form_container form div input,
+.form_container form div textarea {
+  width: 20vw;
+  margin: 5px 0;
+}
+
+.form_container form button {
+  width: 100%;
+  height: 5vh;
+  border-radius: 10px;
+}
+
+.inscription-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+hr {
+  width: 50%;
+  height: 2px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+  border-radius: 500px;
+}
+
+.table-container,
+.new_container {
+  color: #333;
+  padding: 15px;
+}
+.table-container h2,
+.new_container h2 {
+  margin-bottom: 10px;
+}
+
+.new_container p {
+  margin-bottom: 2px;
+}

@@ -12,7 +12,7 @@
     <h2>{{ 'welcome'|trans }}</h2>
     <h2>{{utilisateur.prenom}} {{utilisateur.nom}}</h2>
     <p>{{utilisateur.email}}</p>
-    <a href="{{ path('app_logout') }}">{{ 'modified_account'|trans }}</a>
+    <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">{{ 'modified_account'|trans }}</a>
     </div>
     <div class="commande-container">
     <h2>Vos commandes</h2>

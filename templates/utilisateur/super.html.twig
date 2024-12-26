@@ -5,29 +5,34 @@
 {% block body %}
     <h1>Super Admin</h1>
 
-    <h2>{{ 'admin.new'|trans }}</h2>
-    <ul>
+    <div class="new_container">
+    <h2>{{ 'admin.new'|trans }} : </h2>
         {% for utilisateur in utilisateurs %}
-            <li>
-                <p>{{ utilisateur.nom }} (Inscrit le: {{ utilisateur.dateInscription|date('d/m/Y H:i') }})</p>
-            </li>
+            <p>{{ utilisateur.nom }} (Inscrit le: {{ utilisateur.dateInscription|date('d/m/Y H:i') }})</p>
         {% else %}
             <p>{{ 'admin.no_new'|trans }}</p>
         {% endfor %}
-    </ul>
+    </div>
 
+    <div class="table-container">
     <h2>{{ 'admin.panier'|trans }}</h2>
-    <ul>
+    <table>
+    <tr>
+        <th>Nom: </th>
+        <th>Panier ID: </th>
+        <th>{{ 'admin.crea_date'|trans }}: </th>
+    </tr>
         {% set i = 0 %}
         {% for panier in paniersNonAchetes %}
-            <li>
-                <p>{{utilisateursNonPayes[i].nom}}</p>
-                <p>Panier ID: {{ panier.id }} ({{ 'admin.crea_date'|trans }}: {{ panier.dateAchat|date('d/m/Y') }})</p>
+            <tr>
+                <td>{{utilisateursNonPayes[i].nom}}</td>
+                <td>{{ panier.id }}</td>
+                <td>{{ panier.dateAchat|date('d/m/Y') }}</td>
                 {% set i = i + 1 %}
-            </li>
+            </tr>
         {% else %}
             <p>{{ 'admin.no_panier'|trans }}</p>
         {% endfor %}
-    </ul>
-
+    </table>
+    </div>
 {% endblock %}

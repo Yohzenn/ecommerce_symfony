@@ -21,6 +21,7 @@ success:
   produit_modified: The product has been successfully modified.
   user_added: Your account has been successfully created.
   deconnexion: You have successfully logged out.
+  user_modified: Your information is modified.
 
 label:
   nom: "Name"
@@ -28,6 +29,7 @@ label:
   email: "Email"
   password: "Password"
 
+retour_profil: Go back to your profile
 panier: Your cart
 supprimer: Delete
 acheter: Buy

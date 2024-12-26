@@ -21,6 +21,7 @@ success:
   produit_modified: Le produit a bien été modifié.
   user_added: Votre compte a bien été ajouté.
   deconnexion: Vous avez bien été déconnecté.
+  user_modified: Vos informations on bien été mis à jour.
 
 label:
   nom: "Nom"
@@ -28,6 +29,7 @@ label:
   email: "Email"
   password: "Mot de passe"
 
+retour_profil: Retourner sur votre profil
 panier: Votre panier
 supprimer: Supprimer
 acheter: Acheter
