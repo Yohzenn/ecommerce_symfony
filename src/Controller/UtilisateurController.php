@@ -18,6 +18,9 @@ class UtilisateurController extends AbstractController
     public function index(EntityManagerInterface $em)
     {
         $utilisateur = $this->getUser();
+        if (!$utilisateur) {
+            return $this->redirectToRoute('app_login');
+        }
         
         // Récupérer les commandes de l'utilisateur
         $commandes = $em->getRepository(Panier::class)->findBy(['utilisateur' => $utilisateur]);

@@ -9,19 +9,43 @@ body {
 }
 /* message flash */
 .error {
+  position: absolute;
   background-color: red;
+  top: -60px;
+  left: 50vw;
   color: white;
-  padding: 10px;
-  position: fixed;
+  border-radius: 0 0 10px 10px;
+  padding: 30px 10px 10px 10px;
   text-align: center;
+  animation: apparition 3s ease-in;
 }
 .success {
   background-color: green;
+  position: absolute;
+  top: -60px;
+  left: 50vw;
   color: white;
-  padding: 10px;
-  position: fixed;
+  border-radius: 0 0 10px 10px;
+  padding: 30px 10px 10px 10px;
   text-align: center;
+  animation: apparition 3s ease-in;
 }
+
+@keyframes apparition {
+  0% {
+    transform: translate(0, 0px);
+  }
+  20% {
+    transform: translate(0, 60px);
+  }
+  80% {
+    transform: translate(0, 60px);
+  }
+  100% {
+    transform: translate(0, 0px);
+  }
+}
+
 /* header */
 nav {
   background-color: #333;
@@ -77,7 +101,7 @@ h1 {
 .card {
   padding: 20px;
   margin: 10px 0;
-  width: 30vw;
+  width: 25vw;
   height: 50vh;
   background-color: #333;
   color: white;

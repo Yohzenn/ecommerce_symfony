@@ -37,11 +37,9 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
             $security->login($user, authenticatorName: 'form_login');
             $this->addFlash('success', $translator->trans('success.user_added'));
-            return $this->redirectToRoute('app_produit');
+            return $this->redirectToRoute('app_utilisateur');
 
         }
 
