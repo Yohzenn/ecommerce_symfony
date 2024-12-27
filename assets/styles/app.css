@@ -473,3 +473,41 @@ hr {
   text-decoration: none;
   color: #333;
 }
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  background: rgb(51, 51, 51, 0.2);
+  border-radius: 15px;
+  border: solid #333 2px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  box-shadow: 6px 10px 6px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  color: #fff;
+}
+
+.form-container form #produit_add div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form-container form #produit_add div input,
+.form-container form #produit_add div textarea {
+  width: 20vw;
+  margin: 5px 0;
+}
+
+.form-container form #produit_add div button {
+  width: 100%;
+  height: 5vh;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.form-container {
+  margin: 50px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
