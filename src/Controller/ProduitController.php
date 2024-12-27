@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ProduitController extends AbstractController
 {
-    #[Route('/index', name: 'app_produit')]
+    #[Route('/', name: 'app_produit')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
         $produits = $em->getRepository(Produit::class)->findAll();

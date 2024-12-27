@@ -1,7 +1,98 @@
-{% extends "errors.html.twig" %}
+{% block head %}
+    <title>500</title>
+    <script src="https://kit.fontawesome.com/ec35368b02.js" crossorigin="anonymous"></script>
+{% endblock head %}
+{% block stylesheet %}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .back {
+        text-decoration: none;
+        margin: 0 20px;
+        padding: 10px 20px;
+        color: #ddd;
+        background: #333;
+        font-size: 16px;
+      }
+      body {
+        color: #333;
+        overflow: hidden;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        font-size: 15rem;
+        opacity: 20%;
+      }
+      
+      .triangle i {
+        color: #333; 
+        font-size: 4rem; 
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 100%);  
+      }
+      
+      .triangle { 
+        position: absolute; 
+        width: 0;
+        height: 0;
+        border-left: 80px solid transparent;  
+        border-right: 80px solid transparent; 
+        border-bottom: 160px solid #FF6600;
+        top: 30%;
+        left: 50%;
+        animation: search 3s infinite linear;        
+      }
+      @keyframes search {
+        0% {
+          transform: translate(0, 0);
+        }
+        25% {
+          transform: translate(50px, 50px);
+        }
+        50% {
+          transform: translate(0, 100px);
+        }
+        75% {
+          transform: translate(-50px, 50px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        transform: translate(0, 20%);
+        gap: 20px;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 2rem;
+      }
+    </style>
+{% endblock stylesheet %}
 
 {% block body %}
-<h1>{{ 'error.h1'|trans }}</h1>
-<p>{{ 'error.500'|trans }}</p>
-
+    <h1>500</h1>
+    <div class="triangle"><i class="fa-solid fa-exclamation"></i></div>
+    <div>
+      <h2 style="color: #e84a5f">{{ 'error.h1'|trans }}</h2>
+      <p style="color: #e84a5f; opacity: 0.5">{{ 'error.500'|trans }}</p>
+      <a class="back" href="#">{{ 'back_product'|trans }} </a>
+    </div>
 {% endblock %}

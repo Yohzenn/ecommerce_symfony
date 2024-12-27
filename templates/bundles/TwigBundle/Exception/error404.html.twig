@@ -79,8 +79,8 @@
     <h1>404</h1>
     <i class="fa-solid fa-magnifying-glass"></i>
     <div>
-      <h2 style="color: #e84a5f">Impossible d'afficher la page.</h2>
-      <p style="color: #e84a5f; opacity: 0.5">Oups, cette page n'existe pas.</p>
-      <a class="back" href="#">retour sur les produit</a>
+      <h2 style="color: #e84a5f">{{ 'error.h1'|trans }}</h2>
+      <p style="color: #e84a5f; opacity: 0.5">{{ 'error.404'|trans }}</p>
+      <a href="{{ path('app_produit') }}" class='back'>{{ 'back_product'|trans }} </a>
     </div>
 {% endblock %}

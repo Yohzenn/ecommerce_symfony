@@ -11,7 +11,7 @@
     {% if is_granted('ROLE_ADMIN') %}
     <h1>{{ 'add_product'|trans }}</h1>
     
-    <div class='form_container'>
+    <div class='form-container'>
         {{ form(form) }}
     </div>
     <a class='back' href="{{ path('app_produit') }}" >{{ 'back_product'|trans }}</a>
