@@ -6,28 +6,37 @@
     {% if is_granted('ROLE_USER') %}
         <p>{{ 'connexion_required'|trans }}</p>
     {% else %}
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+    <div class="circle circle-4"></div>
+    <div class="circle circle-5"></div>
     <h1>{{ 'inscription_page'|trans }}</h1>
-
+    <div class="form_container">
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.nom, {
-            label: {{ 'nom'|trans }}
+            label: 'label.nom'|trans 
         }) }}
         {{ form_row(registrationForm.prenom, {
-            label: {{ 'prenom'|trans }}
+            label: 'label.prenom'|trans 
         }) }}
         {{ form_row(registrationForm.email, {
-            label: {{ 'email'|trans }}
+            label:  'label.email'|trans 
         }) }}
         {{ form_row(registrationForm.plainPassword, {
-            label: {{ 'password'|trans }}
+            label: 'label.password'|trans
         }) }}
 
         <button type="submit" class="btn">{{ 'inscription_page'|trans }}</button>
     {{ form_end(registrationForm) }}
+    </div>
+    <div class='inscription-container'>
+    <hr>
     <h2>{{ 'other.connexion'|trans }}</h2>
     <a href="{{ path('app_login') }}"><p>{{ 'connexion_page'|trans }}</p></a>
+    </div>
     {% endif %}
 
 {% endblock %}

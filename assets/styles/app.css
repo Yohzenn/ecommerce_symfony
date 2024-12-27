@@ -240,7 +240,7 @@ h1 {
   right: 20%;
 }
 
-/* Product */
+/* Product show */
 
 .product-container {
   display: flex;
@@ -290,6 +290,7 @@ h1 {
   margin: 20px 0;
   border-radius: 5px;
 }
+
 .price {
   font-size: 1.5rem;
   font-weight: bold;
@@ -304,6 +305,7 @@ h1 {
   color: #333;
   padding-left: 50px;
 }
+
 .add-container p {
   border: 3px solid #333;
   margin: 0 !important;
@@ -311,6 +313,7 @@ h1 {
   padding: 10px 20px;
   font-weight: bold;
 }
+
 .add-container form,
 .add-container form button {
   margin-left: 10px;
@@ -335,6 +338,7 @@ h1 {
   gap: 12px;
 }
 
+/* User */
 .user-info-container {
   display: flex;
   width: 90vw;
@@ -349,7 +353,7 @@ h1 {
   flex-direction: column;
   justify-content: space-around;
   width: 30%;
-  height: 30vh;
+  height: 35vh;
   padding: 20px;
   border-radius: 20px;
 }
@@ -376,6 +380,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -446,6 +451,8 @@ hr {
   margin-bottom: 2px;
 }
 
+/* Show commande */
+
 .show-product {
   padding: 20px;
   color: #333;
@@ -473,6 +480,8 @@ hr {
   text-decoration: none;
   color: #333;
 }
+
+/* show panier */
 
 .form-container form {
   display: flex;
@@ -510,4 +519,15 @@ hr {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+/* show panier */
+
+.inscription-container a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: bold;
+  background-color: #333;
+  padding: 10px 20px;
+  box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.3);
 }
