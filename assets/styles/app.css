@@ -250,7 +250,8 @@ h1 {
 
 .product-container img {
   width: 50%;
-  height: auto;
+  height: 50vh;
+  border: solid 3px #333;
   object-fit: cover;
   border-radius: 20px;
   margin-bottom: 20px;

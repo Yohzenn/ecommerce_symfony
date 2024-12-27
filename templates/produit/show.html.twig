@@ -21,7 +21,7 @@
             </form>
         </div>
     {% else %}
-        <a href="{{path('app_register')}}"><p>{{ 'payment'|trans }}</p></a>
+        <a href="{{path('app_login')}}"><p>{{ 'payment'|trans }}</p></a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
     <hr>

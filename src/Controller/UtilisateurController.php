@@ -48,9 +48,8 @@ class UtilisateurController extends AbstractController
         $form->handleRequest($request);
         $em->flush();
         if($form->isSubmitted() && $form->isValid()){
-            $this->addFlash('error', $translator->trans('success.user_modified'));
+            $this->addFlash('success', $translator->trans('success.user_modified'));
             return $this->redirectToRoute('app_utilisateur');
-            
         }
         return $this->render('utilisateur/edit.html.twig', [
             'form' => $form->createView(),

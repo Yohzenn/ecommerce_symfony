@@ -8,15 +8,17 @@
     <div class="circle circle-3"></div>
     <div class="circle circle-4"></div>
     <div class="circle circle-5"></div>
-    {% if is_granted('ROLE_ADMIN') %}
+    {% if is_granted('ROLE_USER') %}
     <h1>{{ 'modified_account'|trans }}</h1>
-
-    <div class='form_containerd'>
+    <div class='form_container'>
         {{ form_start(form) }}
-        <a href="{{ path('app_produit') }}" >{{ 'back_product'|trans }}</a>
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword) }}
         <button type="submit" class="btn">Modifier</button>
         {{ form_end(form) }}
     </div>
-    <a href="{{ path('app_utilisateur') }}" >{{ 'retour_profil'|trans }}</a>
+    <a class='back' href="{{ path('app_utilisateur') }}" >{{ 'retour_profil'|trans }}</a>
     {% endif %}
 {% endblock %}
