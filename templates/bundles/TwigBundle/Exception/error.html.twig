@@ -1,7 +1,50 @@
-{% extends "errors.html.twig" %}
+{% block head %}
+    <title>error</title>
+    <script src="https://kit.fontawesome.com/ec35368b02.js" crossorigin="anonymous"></script>
+{% endblock head %}
+{% block stylesheet %}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .back {
+        text-decoration: none;
+        margin: 0 20px;
+        padding: 10px 20px;
+        color: #ddd;
+        background: #333;
+        font-size: 16px;
+      }
+      body {
+        color: #333;
+        overflow: hidden;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        transform: translate(0, 50%);
+        gap: 20px;
+      }
+      h2 {
+        margin-top: 20px;
+        font-size: 2rem;
+      }
+    </style>
+{% endblock stylesheet %}
 
 {% block body %}
-<h1>{{ 'error.h1'|trans }}</h1>
-<p>{{ 'category.generique'|trans }}</p>
-
+    <div>
+      <h2 style="color: #e84a5f">{{ 'error.h1'|trans }}</h2>
+      <p style="color: #e84a5f; opacity: 0.5">{{ 'category.generique'|trans }}</p>
+      <a href="{{ path('app_produit') }}" class='back'>{{ 'back_product'|trans }} </a>
+    </div>
 {% endblock %}

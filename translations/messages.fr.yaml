@@ -9,9 +9,9 @@ error:
   csrf: CSRF token invalide.
   h1: Impossible d'afficher la page.
   generique: Oups, une erreur est survenue, veuillez réessayer.
-  403: Oups, une erreur est survenue.
+  403: Vous n'avez pas les droits nécessaires pour accéder à la page.
   404: Oups, cette page n'existe pas.
-  500: Vous n'avez pas les droits nécessaires pour accéder à la page.
+  500: Oups, une erreur est survenue.
 
 success:
   product_add: Le produit a bien été ajouté.
