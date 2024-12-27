@@ -7,6 +7,7 @@ error:
   show_command: The order was not found.
   image: Error while uploading the image.
   csrf: Invalid CSRF token.
+  produit_suppr: The product is not deleted.
   h1: Unable to display the page.
   generique: Oops, an error occurred, please try again.
   403: You do not have the necessary rights to access the page.
@@ -20,6 +21,7 @@ success:
   produit_added: The product has been successfully added.
   produit_modified: The product has been successfully modified.
   user_added: Your account has been successfully created.
+  produit_suppr: The product has been successfully deleted.
   deconnexion: You have successfully logged out.
   user_modified: Your information is modified.
 

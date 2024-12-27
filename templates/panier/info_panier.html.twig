@@ -23,8 +23,8 @@
         {% for produit in produits %}
             <tr>   
                 <td>{{ produit.nom }}</td>
-                <td>{{ produit.prix }}</td>
                 <td>{{ produit.quantite }}</td>
+                <td>{{ produit.prix }}</td>
                 <td>{{produit.prix * produit.quantite}}</td>
                 <td><a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}"><i class="fa-solid fa-xmark" style="font-size: 24px; color: red;"></i></a></td>
             </tr>

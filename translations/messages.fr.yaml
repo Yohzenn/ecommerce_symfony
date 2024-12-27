@@ -8,6 +8,7 @@ error:
   image: Erreur lors du chargement de l'image.
   csrf: CSRF token invalide.
   h1: Impossible d'afficher la page.
+  produit_suppr: Le produit n'a pas été supprimé.
   generique: Oups, une erreur est survenue, veuillez réessayer.
   403: Vous n'avez pas les droits nécessaires pour accéder à la page.
   404: Oups, cette page n'existe pas.
@@ -15,6 +16,7 @@ error:
 
 success:
   product_add: Le produit a bien été ajouté.
+  produit_suppr: Le produit a bien été supprimé.
   suppr: Le produit a bien été supprimé.
   payement: Votre paiement a bien été effectué.
   produit_added: Le produit a bien été ajouté.
