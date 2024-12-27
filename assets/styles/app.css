@@ -455,3 +455,21 @@ hr {
 .show-product h2 {
   margin: 10px 0;
 }
+
+.panier-show-container {
+  padding: 0px 20px;
+  margin-bottom: 40px;
+}
+
+.panier-show-container p {
+  margin: 20px 0;
+}
+
+.panier-show-container .payer {
+  border: #333 solid 4px;
+  border-radius: 10px;
+  padding: 10px 80px;
+  margin: 20px 0;
+  text-decoration: none;
+  color: #333;
+}

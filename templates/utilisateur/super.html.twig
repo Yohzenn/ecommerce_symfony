@@ -16,6 +16,8 @@
 
     <div class="table-container">
     <h2>{{ 'admin.panier'|trans }}</h2>
+    {% if paniersNonAchetes %}
+    
     <table>
     <tr>
         <th>Nom: </th>
@@ -30,9 +32,10 @@
                 <td>{{ panier.dateAchat|date('d/m/Y') }}</td>
                 {% set i = i + 1 %}
             </tr>
-        {% else %}
-            <p>{{ 'admin.no_panier'|trans }}</p>
         {% endfor %}
     </table>
+    {% else %}
+        <p>{{ 'admin.no_panier'|trans }}</p>
+    {% endif %}
     </div>
 {% endblock %}

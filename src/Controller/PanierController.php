@@ -222,7 +222,7 @@ class PanierController extends AbstractController
         $em->persist($panierActif);
         $em->flush();
 
-        $this->addFlash('success', $translator->trans('success.payment'));
+        $this->addFlash('success', $translator->trans('success.payement'));
         return $this->render('panier/info_panier.html.twig', [
             'found' => false,
             'message' => 'Vous n\'avez pas d\'article dans votre panier.',

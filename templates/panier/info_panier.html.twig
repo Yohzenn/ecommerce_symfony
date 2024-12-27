@@ -7,24 +7,34 @@
         <p>{{ 'error.connexion_required'|trans }}</p>
     {% endif %}
 
-    <h1>{{ 'panier'|trans }}</h1>
+    <h1>{{ 'panier'|trans }} :</h1>
+    <div class="panier-show-container">
     {% if not found %}
         <p>{{message}}</p>
     {% else %}
-            <ul>
+        <table>
+            <tr>
+            <th>{{ 'show.product'|trans }} :</th>
+            <th>{{ 'show.quantité'|trans }} :</th>
+            <th>{{ 'show.prix'|trans }} :</th>
+            <th>Total :</th>
+            <th>{{ 'supprimer'|trans }} :</th>
+            </tr>
         {% for produit in produits %}
-            <li>
-                <p>{{ produit.nom }}</p>
-                <p>{{ produit.prix }}</p>
-                <p>{{ produit.quantite }}</p>
-                <p>{{produit.prix * produit.quantite}}</p>
-                <a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}">{{ 'supprimer'|trans }}</a>
-            </li>
+            <tr>   
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.quantite }}</td>
+                <td>{{produit.prix * produit.quantite}}</td>
+                <td><a href="{{ path('app_supprimer_panier', {'id': produit.id}) }}"><i class="fa-solid fa-xmark" style="font-size: 24px; color: red;"></i></a></td>
+            </tr>
         {% endfor %}
-            </ul>
-        
-        <p>Total : {{ prixTotal }}</p>
-        <a href="{{ path('app_payer_panier')}}">{{ 'acheter'|trans }}</a>
+        </table>
+    
+        <p>Total : <span class='price'>{{ prixTotal }} €</span></p>
+        <a class='payer' href="{{ path('app_payer_panier')}}">{{ 'acheter'|trans }}</a>
+    </div>
+        <a class='back' href="{{ path('app_utilisateur') }}">Retour à vos commandes</a>
     {% endif %}
     
 {% endblock %}
