@@ -62,6 +62,11 @@ ul {
   list-style: none;
 }
 
+nav ul div {
+  display: flex;
+  gap: 12px;
+}
+
 li a {
   text-decoration: none;
   color: white;
@@ -285,7 +290,7 @@ h1 {
   margin: 20px 0;
   border-radius: 5px;
 }
-.product-container .product-info .price {
+.price {
   font-size: 1.5rem;
   font-weight: bold;
   color: #e84a5f;
@@ -439,4 +444,14 @@ hr {
 
 .new_container p {
   margin-bottom: 2px;
+}
+
+.show-product {
+  padding: 20px;
+  color: #333;
+}
+
+.show-product p,
+.show-product h2 {
+  margin: 10px 0;
 }

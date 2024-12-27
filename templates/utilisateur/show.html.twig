@@ -7,19 +7,16 @@
         <p>{{ 'connexion_required'|trans }}</p>
     {% endif %}
 
-    <h1>{{ 'detail'|trans }} #{{ commande.id }}</h1>
-
-    <p><strong>Date:</strong> {{ commande.dateAchat|date('d/m/Y H:i') }}</p>
-    <p><strong>Etat:</strong> {{ commande.etat ? 'Payée' : 'Non payée' }}</p>
-
-    <h2>{{ 'show.products'|trans }}</h2>
+    <h1>{{ 'detail'|trans }} #{{ commande.id }} :</h1>
+    <div class="show-product">
+    <h2>{{ 'show.products'|trans }} :</h2>
     <table>
         <thead>
             <tr>
-                <th>{{ 'show.product'|trans }}</th>
-                <th>{{ 'show.quantité'|trans }}</th>
-                <th>{{ 'show.prix'|trans }}</th>
-                <th>Total</th>
+                <th>{{ 'show.product'|trans }} :</th>
+                <th>{{ 'show.quantité'|trans }} :</th>
+                <th>{{ 'show.prix'|trans }} :</th>
+                <th>Total :</th>
             </tr>
         </thead>
         <tbody>
@@ -33,9 +30,12 @@
             {% endfor %}
         </tbody>
     </table>
+    <p><strong>Etat:</strong> <span style='color: blue' > {{ commande.etat ? 'Payée' : 'Non payée' }}</span></p>
+    <p style='opacity: 0.3' ><strong>Date:</strong> {{ commande.dateAchat|date('d/m/Y H:i') }}</p>
 
-    <h3>Total de la commande : {{ prixTotal }} €</h3>
 
-    <a href="{{ path('app_utilisateur', {'id': commande.utilisateur.id}) }}">Retour à vos commandes</a>
+    <h3>Total de la commande : <span class='price'> {{ prixTotal }} € </span></h3>
+    </div>
+    <a class='back' href="{{ path('app_utilisateur', {'id': commande.utilisateur.id}) }}">Retour à vos commandes</a>
 
 {% endblock %}
