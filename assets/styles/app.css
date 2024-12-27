@@ -9,7 +9,7 @@ body {
 }
 /* message flash */
 .error {
-  background-color: red;
+  background-color: #e84a5f;
   position: absolute;
   top: -60px;
   left: 50%;
