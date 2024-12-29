@@ -16,7 +16,7 @@
             <ul>
                 <li><a class='logo' href="{{path('app_produit')}}">Cann'Shop</a></li>
                 <div>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li><a href="{{path('app_super')}}"><i class="fa-solid fa-user-secret"></i></a></li>
                 {% endif %}
                 {% if is_granted('ROLE_USER') %}

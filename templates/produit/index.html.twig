@@ -6,6 +6,7 @@
 {% block body %}
     <h1>{{ 'products'|trans }}</h1>
     <div class='card_container'>
+
     {% for produit in produits %}
         <div class='card'>
             <a href="{{path('app_produit_show', {id:produit.id})}}">

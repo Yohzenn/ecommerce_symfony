@@ -35,8 +35,12 @@ security:
   # Easy way to control access for large sections of your site
   # Note: Only the *first* access control that matches will be used
   access_control:
-    # - { path: ^/admin, roles: ROLE_ADMIN }
-    # - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/super_admin, roles: ROLE_SUPER_ADMIN }
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/user, roles: ROLE_USER }
+  role_hierarchy:
+    ROLE_ADMIN: ROLE_USER
+    ROLE_SUPER_ADMIN: ROLE_ADMIN
 
 when@test:
   security:
@@ -44,6 +48,11 @@ when@test:
       - { path: ^/super_admin, roles: ROLE_SUPER_ADMIN }
       - { path: ^/admin, roles: ROLE_ADMIN }
       - { path: ^/user, roles: ROLE_USER }
+
+    role_hierarchy:
+      ROLE_ADMIN: ROLE_USER
+      ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     password_hashers:
       # By default, password hashers are resource intensive and take time. This is
       # important to generate secure password hashes. In tests however, secure hashes
