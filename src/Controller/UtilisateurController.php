@@ -42,7 +42,7 @@ class UtilisateurController extends AbstractController
     }
     
     #[Route('/utilisateur/{id}/modifier', name: 'app_utilisateur_edit')]
-    public function editProduct(Utilisateur $utilisateur, Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
+    public function editProfil(Utilisateur $utilisateur, Request $request, EntityManagerInterface $em, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(RegistrationFormType::class, $utilisateur);
         $form->handleRequest($request);
